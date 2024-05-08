@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        Task Board: A Board for Your Tasks
+    </h1>
+</div>
+
+<hr />
+<section class="home-page">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <h1 class="text-center">Welcome!</h1>
+    }
+    else
+    {
+        <h1 class="text-center">Welcome, @User.Identity.Name!</h1>
+    }
+</section>
