@@ -6,11 +6,9 @@ namespace HouseRentingSystem_Workshop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
