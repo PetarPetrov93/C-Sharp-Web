@@ -1,5 +1,5 @@
+using HouseRentingSystem.Core.ViewModels;
 using HouseRentingSystem.Core.ViewModels.Home;
-using HouseRentingSystem_Workshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
