@@ -2,7 +2,7 @@ namespace HouseRentingSystem_Workshop
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +36,7 @@ namespace HouseRentingSystem_Workshop
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
 
-            app.RunAsync();
+            await app.RunAsync();
         }
     }
 }
