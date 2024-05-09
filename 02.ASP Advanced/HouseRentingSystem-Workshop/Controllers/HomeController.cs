@@ -1,3 +1,4 @@
+using HouseRentingSystem.Core.ViewModels.Home;
 using HouseRentingSystem_Workshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -13,7 +14,8 @@ namespace HouseRentingSystem_Workshop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new IndexViewModel();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
