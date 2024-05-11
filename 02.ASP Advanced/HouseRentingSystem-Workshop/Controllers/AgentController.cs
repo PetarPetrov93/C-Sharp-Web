@@ -1,7 +1,7 @@
 ﻿using HouseRentingSystem.Core.Contracts;
 using HouseRentingSystem.Core.ViewModels.Agent;
-using HouseRentingSystem_Workshop.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HouseRentingSystem_Workshop.Controllers
 {

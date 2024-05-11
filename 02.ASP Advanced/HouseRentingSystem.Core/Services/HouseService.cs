@@ -13,7 +13,7 @@ namespace HouseRentingSystem.Core.Services
         {
             repository = _repository;
         }
-        public async Task<IEnumerable<HouseServiceIndexViewModel>> LastThreeHouses()
+        public async Task<IEnumerable<HouseServiceIndexViewModel>> LastThreeHousesAsync()
         {
             return await repository
                 .AllReadOnly<House>()
