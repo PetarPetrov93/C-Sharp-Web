@@ -1,3 +1,5 @@
+using HouseRentingSystem_Workshop.ModelBinders;
+
 namespace HouseRentingSystem_Workshop
 {
     public class Program
@@ -9,7 +11,10 @@ namespace HouseRentingSystem_Workshop
             builder.Services.AddApplicationDbContext(builder.Configuration);
             builder.Services.AddApplicationIdentity(builder.Configuration);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+            });
 
             builder.Services.AddApplicationServices();
 

@@ -18,8 +18,9 @@
             public const int DescriptionMinLength = 50;
             public const int DescriptionMaxLength = 500;
 
-            public const string MinimumPrice = "0.0";
-            public const string MaximumPrice = "2000.0";
+            public const string MinimumPrice = "0";
+            public const string MaximumPrice = "2000";
+            public const string PriceErrorMessage = "Price Per Month must be a positive number and less than {2} leva.";
         }
 
         public static class ForAgent
