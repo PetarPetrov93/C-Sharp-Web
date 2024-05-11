@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentingSystem_Workshop.Controllers
 {
-    [Authorize]
-    public class HouseController : Controller
+    public class HouseController : BaseController
     {
         [AllowAnonymous]
         public IActionResult All()
