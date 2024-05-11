@@ -4,6 +4,6 @@ namespace HouseRentingSystem.Core.Contracts
 {
     public interface IHouseService
     {
-        Task<IEnumerable<HouseServiceIndexViewModel>> LastThreeHouses();
+        Task<IEnumerable<HouseServiceIndexViewModel>> LastThreeHousesAsync();
     }
 }

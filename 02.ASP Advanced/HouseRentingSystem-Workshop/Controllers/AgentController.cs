@@ -1,6 +1,6 @@
 ﻿using HouseRentingSystem.Core.Contracts;
 using HouseRentingSystem.Core.ViewModels.Agent;
-using Microsoft.AspNetCore.Authorization;
+using HouseRentingSystem_Workshop.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentingSystem_Workshop.Controllers
@@ -15,7 +15,14 @@ namespace HouseRentingSystem_Workshop.Controllers
         }
         public async Task<IActionResult> Become()
         {
-            return View();
+            if (await agentService.ExistsByIdAsync(User.Id()))
+            {
+                return BadRequest();
+            }
+
+            var model = new BecomeAgentFormViewModel();
+
+            return View(model);
         }
 
         [HttpPost]
