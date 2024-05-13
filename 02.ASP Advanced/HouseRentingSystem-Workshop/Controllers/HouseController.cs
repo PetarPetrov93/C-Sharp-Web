@@ -57,7 +57,12 @@ namespace HouseRentingSystem_Workshop.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var model = new HouseDetailsViewModel();
+            if (!await houseService.ExistAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var model = await houseService.HouseDetailsByIdAsync(id);
             return View(model);
         }
 
