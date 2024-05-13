@@ -5,6 +5,7 @@ using HouseRentingSystem.Core.ViewModels.House;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HouseRentingSystem.Core.Services
 {
@@ -51,15 +52,7 @@ namespace HouseRentingSystem.Core.Services
             var houses = await housesToSHow
                 .Skip((currentPage - 1) * housesPerPage)
                 .Take(housesPerPage)
-                .Select(h => new HouseServiceModel
-                {
-                    Id = h.Id,
-                    Address = h.Address,
-                    ImageUrl = h.ImageUrl,
-                    IsRented = h.RenterId != null,
-                    PricePerMonth = h.PricePerMonth,
-                    Title = h.Title,
-                })
+                .ProjetToHouseServiceModel()
                 .ToListAsync();
 
             int totalHouses = await housesToSHow.CountAsync();
@@ -88,6 +81,22 @@ namespace HouseRentingSystem.Core.Services
             return await repository.AllReadOnly<Category>()
                 .Select(c => c.Name)
                 .Distinct()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<HouseServiceModel>> AllHousesByAgentIdAsync(int agentId)
+        {
+            return await repository.AllReadOnly<House>()
+                .Where(h => h.AgentId == agentId)
+                .ProjetToHouseServiceModel()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<HouseServiceModel>> AllHousesByUserIdAsync(string userId)
+        {
+            return await repository.AllReadOnly<House>()
+                .Where(h => h.RenterId == userId)
+                .ProjetToHouseServiceModel()
                 .ToListAsync();
         }
 

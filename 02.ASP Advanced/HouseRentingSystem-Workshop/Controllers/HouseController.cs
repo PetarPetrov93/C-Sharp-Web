@@ -21,25 +21,37 @@ namespace HouseRentingSystem_Workshop.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All([FromQuery]AllHousesQueryViewModel queryModel)
+        public async Task<IActionResult> All([FromQuery]AllHousesQueryViewModel model)
         {
-            var model = await houseService.AllAsync(
-                queryModel.Category,
-                queryModel.SearchTerm,
-                queryModel.Sorting,
-                queryModel.CurrentPage,
-                queryModel.HousesPerPage);
+            var houses = await houseService.AllAsync(
+                model.Category,
+                model.SearchTerm,
+                model.Sorting,
+                model.CurrentPage,
+                model.HousesPerPage);
 
-            queryModel.TotalHousesCount = model.TotalHousesCount;
-            queryModel.Houses = model.Houses;
-            queryModel.Categories = await houseService.AllCategoriesNamesAsync();
+            model.TotalHousesCount = houses.TotalHousesCount;
+            model.Houses = houses.Houses;
+            model.Categories = await houseService.AllCategoriesNamesAsync();
 
-            return View(queryModel);
+            return View(model);
         }
 
         public async Task<IActionResult> Mine()
         {
-            var model = new AllHousesQueryViewModel();
+            var userId = User.Id();
+
+            IEnumerable<HouseServiceModel> model;
+
+            if (await agentService.ExistsByIdAsync(userId))
+            {
+                var agentId = await agentService.GetAgentIdAsync(userId) ?? 0;
+                model = await houseService.AllHousesByAgentIdAsync(agentId);
+            }
+            else
+            {
+                model = await houseService.AllHousesByUserIdAsync(userId);
+            }
             return View(model);
         }
 
