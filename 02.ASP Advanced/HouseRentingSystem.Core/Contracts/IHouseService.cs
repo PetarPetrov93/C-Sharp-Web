@@ -1,4 +1,5 @@
-﻿using HouseRentingSystem.Core.ViewModels.Home;
+﻿using HouseRentingSystem.Core.Enums;
+using HouseRentingSystem.Core.ViewModels.Home;
 using HouseRentingSystem.Core.ViewModels.House;
 
 namespace HouseRentingSystem.Core.Contracts
@@ -9,5 +10,11 @@ namespace HouseRentingSystem.Core.Contracts
         Task<IEnumerable<HouseCategoryServiceViewModel>> AllCategoriesAsync();
         Task<bool> CategoryExistsAsync(int categoryId);
         Task<int> CreateAsync(HouseFormViewModel model, int agentId);
+        Task<HouseQueryServiceModel> AllAsync(string? category = null,
+                                              string? searchTerm = null,
+                                              HouseSorting sorting = HouseSorting.Newest,
+                                              int currentPage = 1,
+                                              int housePerPage = 2);
+        Task<IEnumerable<string>> AllCategoriesNamesAsync();
     }
 }

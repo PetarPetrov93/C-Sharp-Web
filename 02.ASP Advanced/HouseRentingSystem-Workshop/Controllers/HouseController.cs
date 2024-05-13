@@ -21,9 +21,8 @@ namespace HouseRentingSystem_Workshop.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllHousesQueryViewModel model)
         {
-            var model = new AllHousesQueryViewModel();
 
             return View(model);
         }
