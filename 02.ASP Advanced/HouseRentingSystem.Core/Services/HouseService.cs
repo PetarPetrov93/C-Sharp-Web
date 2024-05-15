@@ -5,8 +5,6 @@ using HouseRentingSystem.Core.ViewModels.House;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Runtime.CompilerServices;
 
 namespace HouseRentingSystem.Core.Services
 {
@@ -212,6 +210,32 @@ namespace HouseRentingSystem.Core.Services
                 .FirstAsync();
         }
 
+        public async Task<bool> IsRentedAsync(int houseId)
+        {
+            bool result = false;
+
+            var house = await repository.GetByIdAsync<House>(houseId);
+            if (house != null)
+            {
+                result = house.RenterId != null;
+            }
+
+            return result;
+        }
+
+        public async Task<bool> IsRentedByUserByIdAsync(int houseId, string userId)
+        {
+            bool result = false;
+
+            var house = await repository.GetByIdAsync<House>(houseId);
+            if (house != null)
+            {
+                result = house.RenterId == userId;
+            }
+
+            return result;
+        }
+
         public async Task<IEnumerable<HouseServiceIndexViewModel>> LastThreeHousesAsync()
         {
             return await repository
@@ -225,6 +249,17 @@ namespace HouseRentingSystem.Core.Services
                     Title = h.Title,
                 })
                 .ToListAsync();
+        }
+
+        public async Task RentAsync(int id, string userId)
+        {
+            var house = await repository.GetByIdAsync<House>(id);
+            if (house != null)
+            {
+                house.RenterId = userId;
+                await repository.SaveChangesAsync();
+            }
+
         }
     }
 }
