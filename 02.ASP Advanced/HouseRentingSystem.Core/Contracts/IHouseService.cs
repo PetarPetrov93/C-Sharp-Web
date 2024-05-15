@@ -26,6 +26,7 @@ namespace HouseRentingSystem.Core.Contracts
         Task DeleteAsync(int houseId);
         Task<bool> IsRentedAsync(int houseId);
         Task<bool> IsRentedByUserByIdAsync(int houseId, string userId);
-        Task RentAsync(int id, string userId);
+        Task RentAsync(int houseId, string userId);
+        Task LeaveAsync(int houseId, string userId);
     }
 }

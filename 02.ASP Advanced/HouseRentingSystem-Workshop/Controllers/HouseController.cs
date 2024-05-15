@@ -1,4 +1,5 @@
 ﻿using HouseRentingSystem.Core.Contracts;
+using HouseRentingSystem.Core.Exceptions;
 using HouseRentingSystem.Core.ViewModels.House;
 using HouseRentingSystem_Workshop.Attributes;
 using Microsoft.AspNetCore.Authorization;
@@ -12,12 +13,13 @@ namespace HouseRentingSystem_Workshop.Controllers
     {
         private readonly IHouseService houseService;
         private readonly IAgentService agentService;
+        private readonly ILogger logger;
 
-        public HouseController(IHouseService _houseService, IAgentService _agentService)
+        public HouseController(IHouseService _houseService, IAgentService _agentService, ILogger<HouseController> _logger)
         {
             houseService = _houseService;
             agentService = _agentService;
-
+            logger = _logger;
         }
 
         [AllowAnonymous]
@@ -214,7 +216,22 @@ namespace HouseRentingSystem_Workshop.Controllers
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
         {
-            return RedirectToAction(nameof(Mine));
+            if (!await houseService.ExistAsync(id))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await houseService.LeaveAsync(id, User.Id());
+            }
+            catch (UnauthorizedActionException ex)
+            {
+                logger.LogError(ex, "HouseController/Leave");
+                return Unauthorized();
+            }
+
+            return RedirectToAction(nameof(All));
         }
     }
 }
