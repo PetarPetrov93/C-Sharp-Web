@@ -23,5 +23,6 @@ namespace HouseRentingSystem.Core.Contracts
         Task EditAsync(int houseId, HouseFormViewModel model);
         Task<bool> HasAgentWithIdAsync(int houseId, string userId);
         Task<HouseFormViewModel?> GetHouseFormViewModelByIdAsync(int id);
+        Task DeleteAsync(int houseId);
     }
 }
