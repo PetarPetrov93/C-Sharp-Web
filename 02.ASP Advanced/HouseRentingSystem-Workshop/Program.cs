@@ -28,7 +28,7 @@ namespace HouseRentingSystem_Workshop
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
+                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 
                 app.UseHsts();
             }
