@@ -8,16 +8,16 @@ namespace HouseRentingSystem_Workshop.Controllers
     [ApiController]
     public class StatisticApiController : ControllerBase
     {
-        private readonly IStatisticService statisticService;
-        public StatisticApiController(IStatisticService _statisticService)
+        private readonly IStatisticService statistics;
+        public StatisticApiController(IStatisticService _statistics)
         {
-            statisticService = _statisticService;
+            statistics = _statistics;
         }
 
-        [HttpGet("get")]
+        [HttpGet]
         public async Task<IActionResult> GetStatistic()
         {
-            var result = await statisticService.TotalAsync();
+            var result = await statistics.TotalAsync();
             return Ok(result);
         }
     }
