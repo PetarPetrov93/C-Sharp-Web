@@ -2,10 +2,11 @@
 using static HouseRentingSystem.Infrastructure.Constants.DataConstants.ForHouse;
 using static HouseRentingSystem.Core.Constants.MessageConstants;
 using System.Runtime.CompilerServices;
+using HouseRentingSystem.Core.Contracts;
 
 namespace HouseRentingSystem.Core.ViewModels.House
 {
-    public class HouseFormViewModel
+    public class HouseFormViewModel : IHouseModel
     {
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength, ErrorMessage = StringLengthErrorMessage)]

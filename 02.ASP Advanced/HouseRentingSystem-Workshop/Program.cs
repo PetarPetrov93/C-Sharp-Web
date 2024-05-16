@@ -1,4 +1,5 @@
 using HouseRentingSystem_Workshop.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentingSystem_Workshop
 {
@@ -14,6 +15,7 @@ namespace HouseRentingSystem_Workshop
             builder.Services.AddControllersWithViews(options =>
             {
                 options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
             builder.Services.AddApplicationServices();
@@ -40,9 +42,17 @@ namespace HouseRentingSystem_Workshop
 
             app.UseAuthorization();
 
-            app.MapDefaultControllerRoute();
-            app.MapRazorPages();
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "House Details",
+                    pattern: "/House/Details/{id}/{information}",
+                    defaults: new {Controller = "House", Action = "Details"}
+                 );
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            });
+         
             await app.RunAsync();
         }
     }

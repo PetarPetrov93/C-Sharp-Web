@@ -1,6 +1,8 @@
-﻿namespace HouseRentingSystem.Core.ViewModels.House
+﻿using HouseRentingSystem.Core.Contracts;
+
+namespace HouseRentingSystem.Core.ViewModels.House
 {
-    public class HouseDetailsViewModel
+    public class HouseDetailsViewModel : IHouseModel
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

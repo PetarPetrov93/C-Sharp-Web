@@ -1,5 +1,6 @@
 ﻿using HouseRentingSystem.Core.Contracts;
 using HouseRentingSystem.Core.Exceptions;
+using HouseRentingSystem.Core.Extensions;
 using HouseRentingSystem.Core.ViewModels.House;
 using HouseRentingSystem_Workshop.Attributes;
 using Microsoft.AspNetCore.Authorization;
@@ -57,7 +58,7 @@ namespace HouseRentingSystem_Workshop.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if (!await houseService.ExistAsync(id))
             {
@@ -65,6 +66,12 @@ namespace HouseRentingSystem_Workshop.Controllers
             }
 
             var model = await houseService.HouseDetailsByIdAsync(id);
+
+            if (information != model.GetInformation())
+            {
+                return BadRequest();
+            }
+
             return View(model);
         }
 
@@ -99,7 +106,7 @@ namespace HouseRentingSystem_Workshop.Controllers
 
             int newHouseId = await houseService.CreateAsync(model, agentId ?? 0);
 
-            return RedirectToAction(nameof(Details), new {id = newHouseId});
+            return RedirectToAction(nameof(Details), new {id = newHouseId, information = model.GetInformation()});
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -145,7 +152,7 @@ namespace HouseRentingSystem_Workshop.Controllers
 
             await houseService.EditAsync(id, model);
 
-            return RedirectToAction(nameof(Details), new { id = id});
+            return RedirectToAction(nameof(Details), new { id = id, information = model.GetInformation()});
         }
 
         public async Task<IActionResult> Delete(int id)
