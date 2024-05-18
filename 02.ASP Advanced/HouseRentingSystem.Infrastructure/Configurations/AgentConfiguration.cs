@@ -10,7 +10,7 @@ namespace HouseRentingSystem.Infrastructure.Configurations
         {
             var data = new DataSeed();
 
-            builder.HasData(data.Agent);
+            builder.HasData(new Agent[] { data.Agent, data.AdminAgent });
         }
     }
 }

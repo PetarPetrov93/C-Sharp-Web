@@ -52,6 +52,8 @@ namespace HouseRentingSystem_Workshop
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
+
+            await app.CreateAdminRoleAsync();
          
             await app.RunAsync();
         }

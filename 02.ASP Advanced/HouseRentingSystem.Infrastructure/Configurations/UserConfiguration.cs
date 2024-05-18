@@ -11,7 +11,7 @@ namespace HouseRentingSystem.Infrastructure.Configurations
         {
             var data = new DataSeed();
 
-            builder.HasData(new ApplicationUser[] { data.AgentUser, data.GuestUser });
+            builder.HasData(new ApplicationUser[] { data.AgentUser, data.GuestUser, data.AdminUser });
         }
     }
 }
