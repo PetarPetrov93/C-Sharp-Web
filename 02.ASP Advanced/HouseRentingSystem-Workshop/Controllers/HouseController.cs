@@ -5,7 +5,6 @@ using HouseRentingSystem.Core.ViewModels.House;
 using HouseRentingSystem_Workshop.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
 
 namespace HouseRentingSystem_Workshop.Controllers
@@ -116,7 +115,8 @@ namespace HouseRentingSystem_Workshop.Controllers
                 return BadRequest();
             }
 
-            if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+            if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -134,7 +134,8 @@ namespace HouseRentingSystem_Workshop.Controllers
                 return BadRequest();
             }
 
-            if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+            if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -162,7 +163,8 @@ namespace HouseRentingSystem_Workshop.Controllers
                 return BadRequest();
             }
 
-            if (!await houseService.HasAgentWithIdAsync(id, User.Id()))
+            if (!await houseService.HasAgentWithIdAsync(id, User.Id())
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -187,7 +189,8 @@ namespace HouseRentingSystem_Workshop.Controllers
                 return BadRequest();
             }
 
-            if (!await houseService.HasAgentWithIdAsync(model.Id, User.Id()))
+            if (!await houseService.HasAgentWithIdAsync(model.Id, User.Id())
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -205,7 +208,8 @@ namespace HouseRentingSystem_Workshop.Controllers
                 return BadRequest();
             }
 
-            if (await agentService.ExistsByIdAsync(User.Id()))
+            if (await agentService.ExistsByIdAsync(User.Id())
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }

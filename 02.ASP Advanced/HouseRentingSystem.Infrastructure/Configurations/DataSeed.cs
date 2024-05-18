@@ -71,7 +71,7 @@ namespace HouseRentingSystem.Infrastructure.Configurations
                 LastName = "Adminov"
             };
 
-            GuestUser.PasswordHash =
+            AdminUser.PasswordHash =
             hasher.HashPassword(AdminUser, "admin123");
         }
 
