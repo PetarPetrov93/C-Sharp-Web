@@ -198,6 +198,7 @@ namespace HouseRentingSystem.Core.Services
                     Address = h.Address,
                     Agent = new ViewModels.Agent.AgentServiceModel()
                     {
+                        FullName = $"{h.Agent.User.FirstName} {h.Agent.User.LastName}",
                         Email = h.Agent.User.Email,
                         PhoneNumber = h.Agent.PhoneNumber
                     },
