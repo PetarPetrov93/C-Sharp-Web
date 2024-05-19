@@ -16,6 +16,7 @@ namespace HouseRentingSystem.Core.Services
         public async Task<IEnumerable<RentServiceModel>> AllAsync()
         {
             return await repository.AllReadOnly<House>()
+                .Where(h => h.RenterId != null)
                 .Include(h => h.Agent)
                 .Include(h => h.Renter)
                 .Select(h => new RentServiceModel()
