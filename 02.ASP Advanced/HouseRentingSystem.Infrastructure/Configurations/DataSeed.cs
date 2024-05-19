@@ -1,13 +1,19 @@
 ﻿using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using static HouseRentingSystem.Infrastructure.Constants.CustomClaims;
 
 namespace HouseRentingSystem.Infrastructure.Configurations
 {
     internal class DataSeed
     {
         public ApplicationUser AgentUser { get; set; }
+        public IdentityUserClaim<string> AgentUserClaim { get; set; }
+
         public ApplicationUser GuestUser { get; set; }
+        public IdentityUserClaim<string> GuestUserClaim { get; set; }
+
         public ApplicationUser AdminUser { get; set; }
+        public IdentityUserClaim<string> AdminUserClaim { get; set; }
 
         public Agent Agent { get; set; }
         public Agent AdminAgent { get; set; }
@@ -43,6 +49,14 @@ namespace HouseRentingSystem.Infrastructure.Configurations
                 LastName = "Michaels"
             };
 
+            AgentUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 1,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Linda Michaels",
+                UserId = "dea12856-c198-4129-b3f3-b893d8395082",
+            };
+
             AgentUser.PasswordHash =
                  hasher.HashPassword(AgentUser, "agent123");
 
@@ -57,6 +71,14 @@ namespace HouseRentingSystem.Infrastructure.Configurations
                 LastName = "Lesly"
             };
 
+            GuestUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 2,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Teodor Lesly",
+                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+            };
+
             GuestUser.PasswordHash =
             hasher.HashPassword(AgentUser, "guest123");
 
@@ -69,6 +91,14 @@ namespace HouseRentingSystem.Infrastructure.Configurations
                 NormalizedEmail = "admin@mail.com",
                 FirstName = "Admin",
                 LastName = "Adminov"
+            };
+
+            AdminUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 3,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Admin Adminov",
+                UserId = "158122db-fe9b-4553-98b2-046e5929d0fe",
             };
 
             AdminUser.PasswordHash =
