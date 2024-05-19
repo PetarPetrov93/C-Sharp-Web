@@ -26,5 +26,19 @@ namespace HouseRentingSystem_Workshop.Areas.Admin.Controllers
             };
             return View(myHouses);
         }
+
+        public async Task<IActionResult> Approve()
+        {
+            var model = await houseService.GetUnapprovedAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Approve(int houseId)
+        {
+            await houseService.ApproveHouseAsync(houseId);
+            return RedirectToAction(nameof(Approve));
+        }
     }
 }
