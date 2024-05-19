@@ -53,6 +53,9 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         [Comment("Renter Id")]
         public string? RenterId { get; set; }
 
+        [ForeignKey(nameof(RenterId))]
+        public ApplicationUser? Renter { get; set; }
+
         [Comment("Is house approved by admin")]
         public bool IsApproved {  get; set; }
     }

@@ -21,7 +21,7 @@ namespace HouseRentingSystem.Core.Services
                 {
                     Email = u.Email ?? string.Empty,
                     FullName = $"{u.FirstName} {u.LastName}",
-                    PhoneNumber = u.PhoneNumber,
+                    PhoneNumber = u.Agent != null ? u.Agent.PhoneNumber : null,
                     IsAgent = u.Agent != null
                 })
                 .ToListAsync();
