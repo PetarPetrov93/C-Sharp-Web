@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using static HouseRentingSystem.Core.Constants.RoleConstants;
+using static HouseRentingSystem.Core.Constants.AdminConstants;
 
 namespace HouseRentingSystem_Workshop.Areas.Identity.Pages.Account
 {

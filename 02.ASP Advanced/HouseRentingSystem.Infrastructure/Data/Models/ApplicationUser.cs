@@ -15,5 +15,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         [MaxLength(LastNameMaxLength)]
         [PersonalData]
         public string LastName { get; set; } = string.Empty;
+
+        public Agent? Agent { get; set; }
     }
 }

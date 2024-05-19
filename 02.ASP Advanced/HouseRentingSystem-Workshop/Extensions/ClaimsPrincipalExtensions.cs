@@ -1,4 +1,4 @@
-﻿using static HouseRentingSystem.Core.Constants.RoleConstants;
+﻿using static HouseRentingSystem.Core.Constants.AdminConstants;
 namespace System.Security.Claims
 {
     public static class ClaimsPrincipalExtensions
