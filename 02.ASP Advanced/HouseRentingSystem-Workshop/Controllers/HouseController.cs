@@ -6,6 +6,7 @@ using HouseRentingSystem_Workshop.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static HouseRentingSystem.Core.Constants.MessageConstants;
 
 namespace HouseRentingSystem_Workshop.Controllers
 {
@@ -226,6 +227,8 @@ namespace HouseRentingSystem_Workshop.Controllers
 
             await houseService.RentAsync(id, User.Id());
 
+            TempData[UserMessageSuccess] = "You have rented the house!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -240,6 +243,7 @@ namespace HouseRentingSystem_Workshop.Controllers
             try
             {
                 await houseService.LeaveAsync(id, User.Id());
+                TempData[UserMessageError] = "You have left the house!";
             }
             catch (UnauthorizedActionException ex)
             {
